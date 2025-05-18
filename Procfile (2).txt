@@ -1,1 +1,1 @@
-web: python ACTAI.py
+web: python -m bot.main
