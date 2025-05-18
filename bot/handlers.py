@@ -10,7 +10,7 @@ from telegram.ext import (
     filters,
 )
 
-from .config import config
+from .config import settings
 from .sessions import (
     get_session,
     update_session,
