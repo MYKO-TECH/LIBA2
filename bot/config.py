@@ -2,6 +2,7 @@ import os
 import logging
 from pydantic import BaseModel, ValidationError
 from dotenv import load_dotenv
+from .config import settings
 from cryptography.fernet import Fernet
 
 # ---------------- Logging ----------------
@@ -51,7 +52,7 @@ try:
     cipher = Fernet(settings.ENCRYPT_KEY.encode())
 
     # Set debug mode verbosity if requested
-    if config.DEBUG:
+    if settings.DEBUG:
         logging.getLogger().setLevel(logging.DEBUG)
         logger.info("Debug mode enabled")
 
