@@ -55,7 +55,7 @@ async def metrics(request: web.Request) -> web.Response:
         content_type='text/plain'
     )
 
-async def create_web_app(bot, dispatcher) -> web.Application:
+def create_web_app(bot, dispatcher) -> web.Application:
     """Configure web application"""
     app = web.Application()
     app['bot'] = bot
