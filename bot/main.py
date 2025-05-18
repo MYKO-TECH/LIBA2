@@ -40,7 +40,7 @@ class ACTBot:
         """Start the bot, web server, and keep everything running."""
         async with self.app:
             # ----- changed line: pass bot and app to create_web_app -----
-            self.web_app = await create_web_app(self.app.bot, self.app)
+            self.web_app = create_web_app(self.app.bot, self.app)
 
             runner = web.AppRunner(self.web_app)
             await runner.setup()
