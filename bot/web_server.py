@@ -1,5 +1,5 @@
 from aiohttp import web
-from .config import config
+from .config import settings
 from .sessions import redis
 import logging
 from prometheus_client import generate_latest, Counter, Histogram
