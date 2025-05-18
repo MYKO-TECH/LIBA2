@@ -16,7 +16,7 @@ load_dotenv()
 
 # ---------------- Settings ----------------
 class Settings(BaseModel):
-    __version__: str = "1.0.0"          # <─ Added version field
+    version: str = "1.0.0"         # <─ Added version field
 
     # Required configurations
     TELEGRAM_TOKEN: str
