@@ -2,7 +2,6 @@ import os
 import logging
 from pydantic import BaseModel, ValidationError
 from dotenv import load_dotenv
-from .config import settings
 from cryptography.fernet import Fernet
 
 # ---------------- Logging ----------------
