@@ -1,6 +1,7 @@
 import re
 import json
 import logging
+from .knowledge_loader import text_summary
 from telegram import Update
 from telegram.ext import (
     ContextTypes,
@@ -202,7 +203,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
 # GPT fallback
 # ──────────────────────────────
 async def handle_ai_fallback(update: Update, user_message: str):
-    knowledge = get_knowledge().text_summary()
+    knowledge = text_summary(get_knowledge())
     try:
         response = await ai_service.get_response(user_message, knowledge)
         await update.message.reply_text(format_message("ACT RESPONSE 📌", response))
