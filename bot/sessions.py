@@ -1,7 +1,7 @@
 from redis.asyncio import Redis
 import json
 from datetime import timedelta, datetime
-from .config import config, cipher
+from .config import settings, cipher
 import logging
 
 logger = logging.getLogger(__name__)
