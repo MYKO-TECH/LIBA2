@@ -1,12 +1,12 @@
 from redis.asyncio import Redis
 import json
-from datetime import timedelta, datetime
-from .config import settings, cipher
+from datetime import datetime
+from .config import settings, cipher  # ✅ Correct import
 import logging
 
 logger = logging.getLogger(__name__)
 
-redis = Redis.from_url(settings.REDIS_URL)
+redis = Redis.from_url(settings.REDIS_URL)  # ✅ Uses environment variable
 
 async def get_session(user_id: str) -> dict:
     """Retrieve and decrypt user session"""
@@ -26,9 +26,11 @@ async def update_session(user_id: str, data: dict) -> None:
         current = await get_session(user_id)
         merged = {**current, **data}
         encrypted = cipher.encrypt(json.dumps(merged).encode())
+        
+        # ✅ Fixed config→settings and TTL handling
         await redis.setex(
             f"session:{user_id}",
-            timedelta(seconds=config.SESSION_TTL),
+            settings.SESSION_TTL,  # Directly use integer seconds
             encrypted
         )
     except Exception as e:
@@ -40,7 +42,7 @@ async def check_rate_limit(user_id: str) -> bool:
         current = await redis.incr(f"rate_limit:{user_id}")
         if current == 1:
             await redis.expire(f"rate_limit:{user_id}", 60)
-        return current <= config.RATE_LIMIT
+        return current <= settings.RATE_LIMIT  # ✅ Fixed config→settings
     except Exception as e:
         logger.error(f"Rate limit check error: {str(e)}")
         return False
