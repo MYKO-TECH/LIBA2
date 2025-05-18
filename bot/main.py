@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 class ACTBot:
     def __init__(self):
         # Build the Telegram application
-        self.app = Application.builder().token(config.settings.TELEGRAM_TOKEN).build()
+        self.app = Application.builder().token(settings.TELEGRAM_TOKEN).build()
         self.web_app = None
         self._setup_handlers()
 
