@@ -1,4 +1,4 @@
-import aioredis
+from redis.asyncio import Redis
 import json
 from datetime import timedelta, datetime
 from .config import config, cipher
@@ -6,7 +6,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-redis = aioredis.from_url(config.REDIS_URL)
+redis = Redis.from_url(config.REDIS_URL)
 
 async def get_session(user_id: str) -> dict:
     """Retrieve and decrypt user session"""
