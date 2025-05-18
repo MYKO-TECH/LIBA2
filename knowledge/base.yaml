@@ -1,0 +1,14 @@
+version: 1.2
+courses:
+  computer_science:
+    price: 15000
+    currency: Br/half-year
+  business_administration:
+    price: 15000
+    currency: Br/half-year
+contacts:
+  phone: "0911862300"
+  office_phone: "0955040404"
+  email: "registrar@act.edu.et"
+location:
+  main: "4 kilo back side of Abrhot Library"
