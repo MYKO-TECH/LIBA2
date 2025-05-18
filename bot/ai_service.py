@@ -1,7 +1,7 @@
 import logging
 from openai import AsyncOpenAI
 from tenacity import retry, stop_after_attempt, wait_random_exponential
-from .config import config
+from .config import settings
 import re
 
 logger = logging.getLogger(__name__)
@@ -9,8 +9,8 @@ logger = logging.getLogger(__name__)
 class AIService:
     def __init__(self):
         self.client = AsyncOpenAI(
-            api_key=config.OPENAI_API_KEY,
-            timeout=config.API_TIMEOUT
+            api_key=settings.OPENAI_API_KEY,
+            timeout=settings.API_TIMEOUT
         )
         self.moderation_enabled = config.CONTENT_MODERATION
 
@@ -35,7 +35,7 @@ class AIService:
                     "role": "user",
                     "content": prompt
                 }],
-                max_tokens=config.MAX_TOKENS,
+                max_tokens=settings.MAX_TOKENS,
                 temperature=0.7
             )
             
@@ -56,6 +56,6 @@ class AIService:
 
     def _sanitize_output(self, text: str) -> str:
         """Remove special characters and potential injection attempts"""
-        if config.SANITIZE_INPUT:
+       if settings.SANITIZE_INPUT:
             return re.sub(r'[^\w\s.,!?\-@#$%&*()]', '', text).strip()
         return text.strip()
