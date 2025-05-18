@@ -41,7 +41,7 @@ class Settings(BaseModel):
 
 try:
     # Validate environment variables
-    config = Settings(**os.environ)
+    settings = Settings(**os.environ)
 
     logger.info("Loaded configuration:")
     logger.info(f"- TELEGRAM_TOKEN exists: {'TELEGRAM_TOKEN' in os.environ}")
