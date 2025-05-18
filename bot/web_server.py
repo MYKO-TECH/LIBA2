@@ -43,7 +43,7 @@ async def health_check(request: web.Request) -> web.Response:
     checks = {
         "redis": await redis.ping(),
         "status": "ok",
-        "version": config.__version__
+        "version": config.version
     }
     status = 200 if all(checks.values()) else 503
     return web.json_response(checks, status=status)
