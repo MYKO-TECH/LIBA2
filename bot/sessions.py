@@ -54,17 +54,3 @@ async def log_security_event(user_id: str, event: str) -> None:
         )
     except Exception as e:
         logger.error(f"Security log error: {str(e)}")
-
-# ADDITION: alternative version of check_rate_limit
-async def check_rate_limit_v2(user_id: str) -> bool:
-    try:
-        current = int(await redis.get(f"rate_limit:{user_id}") or 0)
-        if current >= config.RATE_LIMIT:
-            return False
-        await redis.incr(f"rate_limit:{user_id}")
-        if current == 0:
-            await redis.expire(f"rate_limit:{user_id}", 60)
-        return True
-    except Exception as e:
-        logger.error(f"Rate limit error: {str(e)}")
-        return False
