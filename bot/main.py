@@ -5,7 +5,7 @@ from aiohttp import web
 from telegram import Update
 from telegram.ext import Application
 
-from . import config
+from .config import settings
 from .web_server import create_web_app
 from .handlers import get_handlers
 
