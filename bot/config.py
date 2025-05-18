@@ -45,10 +45,10 @@ try:
 
     logger.info("Loaded configuration:")
     logger.info(f"- TELEGRAM_TOKEN exists: {'TELEGRAM_TOKEN' in os.environ}")
-    logger.info(f"- Config keys: {list(config.model_dump().keys())}")
+    logger.info(f"- Config keys: {settings.model_dump().keys()}")
 
     # Initialize encryption
-    cipher = Fernet(config.ENCRYPT_KEY.encode())
+    cipher = Fernet(settings.ENCRYPT_KEY.encode())
 
     # Set debug mode verbosity if requested
     if config.DEBUG:
