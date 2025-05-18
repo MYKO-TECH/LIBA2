@@ -6,7 +6,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-redis = Redis.from_url(config.REDIS_URL)
+redis = Redis.from_url(settings.REDIS_URL)
 
 async def get_session(user_id: str) -> dict:
     """Retrieve and decrypt user session"""
